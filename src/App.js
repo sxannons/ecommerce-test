@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import HomePage from './pages/homepage/homepage';
+import ShopPage from './pages/shop';
 
 import './App.css';
 
@@ -10,6 +11,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/shop" element={<ShopPage />} />
         <Route
           path="*"
           element={
