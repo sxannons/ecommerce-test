@@ -58,7 +58,7 @@ export default class SignInForm extends Component {
 
           <div className="buttons">
             <CustomButton type="submit">Sign In</CustomButton>
-            <CustomButton onClick={this.handleGoogleSignIn} isGoogleSignIn>
+            <CustomButton type="button" onClick={this.handleGoogleSignIn} isGoogleSignIn>
               Sign in with Google
             </CustomButton>
           </div>
