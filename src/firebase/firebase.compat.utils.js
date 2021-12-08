@@ -11,6 +11,16 @@ const firebaseConfig = {
   appId: '1:467044549201:web:79cf9c5707bf163eab2e70',
   measurementId: '${config.measurementId}',
 };
+
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  if (!userAuth) return;
+
+  const userRef = firestore.doc('users/123sdfsd');
+  const snapShot = await userRef.get();
+
+  console.log(snapShot);
+};
+
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
 const provider = new firebase.auth.GoogleAuthProvider();

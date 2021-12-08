@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Navigate } from 'react-router-dom';
 
 import { signInWithGoogle } from '../../firebase/firebase.utils';
 
@@ -33,7 +32,7 @@ export default class SignInForm extends Component {
   handleGoogleSignIn = () => {
     signInWithGoogle()
       .then(() => {
-        console.log('signed in');
+        console.log('redirect to home');
       })
       .catch((error) => {
         console.log(error);
