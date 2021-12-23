@@ -12,6 +12,8 @@ import HomePage from './pages/homepage/homepage';
 import ShopPage from './pages/shop';
 import CheckoutPage from './pages/checkout/CheckoutPage';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up';
+import CollectionsOverview from './components/collections-overview/CollectionsOverview';
+import CollectionPage from './pages/collection/CollectionPage';
 
 import './App.css';
 
@@ -47,6 +49,10 @@ class App extends React.Component {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/shop" element={<ShopPage />} />
+          <Route path="/shop" element={<ShopPage />}>
+            <Route path="" element={<CollectionsOverview />} />
+            <Route path=":collectionId" element={<CollectionPage />} />
+          </Route>
           <Route exact path="/signin" element={this.props.currentUser ? <Navigate replace to="/" /> : <SignInAndSignUpPage />} />
           <Route exact path="/checkout" element={<CheckoutPage />} />
           <Route
