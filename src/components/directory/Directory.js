@@ -6,15 +6,15 @@ import { selectDirectorySections } from '../../store/directory/directorySelector
 
 import MenuItem from '../menuItem/MenuItem';
 
-import './Directory.styles.scss';
+import { DirectoryMenuContainer } from './Directory.styles';
 
 const Directory = ({ sections }) => {
   return (
-    <div className="directory-menu">
+    <DirectoryMenuContainer>
       {sections.map(({ id, ...rest }) => (
         <MenuItem key={id} {...rest} />
       ))}
-    </div>
+    </DirectoryMenuContainer>
   );
 };
 

@@ -6,22 +6,22 @@ import { selectShopCollection } from '../../store/shop/shopSelectors';
 
 import CollectionItem from '../../components/collection-item/CollectionItem';
 
-import './CollectionPage.styles.scss';
+import { CollectionItems, CollectionPageContainer, CollectionTitle } from './CollectionPage.styles';
 
 const CollectionPage = () => {
   const { collectionId } = useParams();
   const { title, items } = useSelector(selectShopCollection(collectionId));
 
   return (
-    <div className="collection-page">
-      <h2 className="title">{title}</h2>
-      <div className="items">
+    <CollectionPageContainer>
+      <CollectionTitle>{title}</CollectionTitle>
+      <CollectionItems>
         {items.map((item) => (
           <CollectionItem key={item.id} item={item} />
         ))}
-      </div>
+      </CollectionItems>
       {collectionId}
-    </div>
+    </CollectionPageContainer>
   );
 };
 

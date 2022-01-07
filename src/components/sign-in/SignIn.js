@@ -5,7 +5,7 @@ import { auth, signInWithGoogle, signInWithEmail } from '../../firebase/firebase
 import CustomButton from '../custom-button/CustomButton';
 import FormInput from '../form-input/FormInput';
 
-import './SignIn.styles.scss';
+import { ButtonsBarContainer, SignInContainer, SignInTitle } from './SignIn.styles';
 
 export default class SignInForm extends Component {
   constructor(props) {
@@ -48,22 +48,22 @@ export default class SignInForm extends Component {
 
   render() {
     return (
-      <div className="sign-in">
-        <h2>I already have an account</h2>
+      <SignInContainer>
+        <SignInTitle>I already have an account</SignInTitle>
         <span>Sign in with your email and password</span>
 
         <form onSubmit={this.handleSubmit}>
           <FormInput name="email" type="email" value={this.state.email} handleChange={this.handleChange} label="Email" required />
           <FormInput name="password" type="password" value={this.state.password} handleChange={this.handleChange} label="Password" required />
 
-          <div className="buttons">
+          <ButtonsBarContainer>
             <CustomButton type="submit">Sign In</CustomButton>
             <CustomButton type="button" onClick={this.handleGoogleSignIn} isGoogleSignIn>
               Sign in with Google
             </CustomButton>
-          </div>
+          </ButtonsBarContainer>
         </form>
-      </div>
+      </SignInContainer>
     );
   }
 }
