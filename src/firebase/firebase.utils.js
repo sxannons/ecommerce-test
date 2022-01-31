@@ -15,8 +15,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
+export const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' });
 
 export const firebaseApp = app;
 export const auth = getAuth();
@@ -26,8 +26,17 @@ export const dbGetDocs = getDocs;
 export const dbCollection = collection;
 export const createFirebaseUserWithEmail = createUserWithEmailAndPassword;
 export const signInWithEmail = signInWithEmailAndPassword;
-export const signInWithGoogle = () => signInWithPopup(auth, provider);
+export const signInWithGoogle = () => signInWithPopup(auth, googleProvider);
 export const onFirestoreChange = onSnapshot;
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribeFromAuth = auth.onAuthStateChanged((userAuth) => {
+      unsubscribeFromAuth();
+
+      resolve(userAuth);
+    }, reject);
+  });
+};
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
