@@ -1,12 +1,26 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { clearItemFromCart, addItem, removeItem } from '../../store/cart/cartActions';
 
 import { ArrowContainer, CheckoutItemContainer, ImageContainer, NameContainer, PriceContainer, QuantityContainer, RemoveButtonContainer, ValueContainer } from './Checkout.styles';
 
-const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
+const CheckoutItem = ({ cartItem }) => {
+  const dispatch = useDispatch();
+
   const { name, imageUrl, price, quantity } = cartItem;
+
+  const handleRemoveItem = () => {
+    dispatch(removeItem(cartItem));
+  };
+
+  const handleAddItem = () => {
+    dispatch(addItem(cartItem));
+  };
+
+  const handleClearItem = () => {
+    dispatch(clearItemFromCart(cartItem));
+  };
 
   return (
     <CheckoutItemContainer>
@@ -15,20 +29,14 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
       </ImageContainer>
       <NameContainer>{name}</NameContainer>
       <QuantityContainer>
-        <ArrowContainer onClick={() => removeItem(cartItem)}>&#10094;</ArrowContainer>
+        <ArrowContainer onClick={handleRemoveItem}>&#10094;</ArrowContainer>
         <ValueContainer>{quantity}</ValueContainer>
-        <ArrowContainer onClick={() => addItem(cartItem)}>&#10095;</ArrowContainer>
+        <ArrowContainer onClick={handleAddItem}>&#10095;</ArrowContainer>
       </QuantityContainer>
       <PriceContainer>{price}</PriceContainer>
-      <RemoveButtonContainer onClick={() => clearItem(cartItem)}>&#10005;</RemoveButtonContainer>
+      <RemoveButtonContainer onClick={handleClearItem}>&#10005;</RemoveButtonContainer>
     </CheckoutItemContainer>
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  clearItem: (item) => dispatch(clearItemFromCart(item)),
-  addItem: (item) => dispatch(addItem(item)),
-  removeItem: (item) => dispatch(removeItem(item)),
-});
-
-export default connect(null, mapDispatchToProps)(CheckoutItem);
+export default CheckoutItem;
